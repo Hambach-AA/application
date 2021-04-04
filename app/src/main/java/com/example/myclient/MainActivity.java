@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnSignIn, btnReg;
     RelativeLayout root;
-
+// test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
