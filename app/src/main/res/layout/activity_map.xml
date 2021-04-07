@@ -6,4 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MapActivity">
 
+    <Button
+        android:id="@+id/btn_settings"
+        android:layout_width="301dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="25dp"
+        android:text="Настройки"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_viewing_records" />
+
+    <Button
+        android:id="@+id/btn_user_profile"
+        android:layout_width="301dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="25dp"
+        android:onClick="onClick_user_profile"
+        android:text="Профиль пользователя"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_settings" />
+
+    <Button
+        android:id="@+id/btn_selecting_wizard"
+        android:layout_width="301dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="128dp"
+        android:onClick="onClick_selecting_wizard"
+        android:text="Выбор мастера"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_viewing_records"
+        android:layout_width="301dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="25dp"
+        android:text="Просмотр записей"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_selecting_wizard" />
 </androidx.constraintlayout.widget.ConstraintLayout>

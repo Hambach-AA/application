@@ -14,40 +14,40 @@
         android:orientation="vertical">
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/emailField"
+            text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/emailField"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            text=""
+            android:text="qwertyuiop@qaz.ru"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
-            android:textSize="20sp"
 
-            app:met_floatingLabel="highlight"
+            android:textSize="20sp"
             app:met_baseColor="#0056d3"
-            app:met_primaryColor="#982360"
             app:met_errorColor="#ddaa00"
-            app:met_singleLineEllipsis="true"
-            />
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="#982360"
+            app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/passField"
+            text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/passField"
             android:hint="Password"
             android:inputType="textPassword"
-            text=""
+            android:text="qwertyuiop"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
-            android:textSize="20sp"
 
-            app:met_floatingLabel="highlight"
+            android:textSize="20sp"
             app:met_baseColor="#0056d3"
-            app:met_primaryColor="#982360"
             app:met_errorColor="#ddaa00"
-            app:met_singleLineEllipsis="true"
-            />
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="#982360"
+            app:met_singleLineEllipsis="true" />
 
 
 

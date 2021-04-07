@@ -36,13 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnSignIn = findViewById(R.id.btnSignIn);
-        btnReg = findViewById(R.id.btnRegister);
-        root = findViewById(R.id.root_element);
-
-        auth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
-        users = db.getReference("Clients");
+        init();
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
                 showSignInWindow();
             }
         });
+    }
+
+    private void init(){
+        btnSignIn = findViewById(R.id.btnSignIn);
+        btnReg = findViewById(R.id.btnRegister);
+        root = findViewById(R.id.root_element);
+
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        users = db.getReference("Clients");
     }
 
     private void showSignInWindow() {
@@ -158,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
                                 user.setEmail(email.getText().toString());
                                 user.setName(name.getText().toString());
                                 user.setPhone(phone.getText().toString());
-                                user.setPass(pass.getText().toString());
                                 //add in DataBase
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(user)
