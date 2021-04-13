@@ -2,6 +2,7 @@ package com.example.myclient.Models;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Master {
     private String
@@ -11,32 +12,18 @@ public class Master {
             phone ="unknown",
             address ="unknown",
             info ="unknown";
+
     ArrayList<String> List_services = new ArrayList<>();
     ArrayList<Schedule> schedule = new ArrayList<>();
 
-//    public Master(String first_name, String second_name, String email, String phone, String address, String info, ArrayList<String> List_services, ArrayList<Schedule> schedule){
-//        this.first_name = first_name;
-//        this.second_name = second_name;
-//        this.email = email;
-//        this.phone = phone;
-//        this.address = address;
-//        this.info = info;
-//        this.List_services = List_services;
-//        this.schedule = schedule;
-//    }
     public Master() {
     }
 
     public Master(String name, String email, String pass, String phone) {
         this.first_name = name;
         this.email = email;
-        //this.pass = pass;
         this.phone = phone;
     }
-//    public Master(String first_name, String second_name){
-//        this.first_name=first_name;
-//        this.second_name=second_name;
-//    }
 
     public String getAddress() {
         return address;
@@ -100,5 +87,25 @@ public class Master {
 
     public void setSchedule(ArrayList<Schedule> schedule) {
         this.schedule = schedule;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Master master = (Master) o;
+        return Objects.equals(first_name, master.first_name) &&
+                Objects.equals(second_name, master.second_name) &&
+                Objects.equals(email, master.email) &&
+                Objects.equals(phone, master.phone) &&
+                Objects.equals(address, master.address) &&
+                Objects.equals(info, master.info) &&
+                Objects.equals(List_services, master.List_services) &&
+                Objects.equals(schedule, master.schedule);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(first_name, second_name, email, phone, address, info, List_services, schedule);
     }
 }

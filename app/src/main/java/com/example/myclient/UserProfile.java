@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myclient.Models.User;
@@ -15,13 +17,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UserProfile extends AppCompatActivity {
 
     DatabaseReference mDatabase;
+//    DatabaseReference usersRef;
+//    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//    DatabaseReference ref = database.getReference("");
     FirebaseUser user;
 
-    TextView text_Name, text_Email, text_Phone_number;
-
+    TextView pSecond_name, pName, pPhone, pEmail;
+    Button pSave;
+    User client = new User();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +43,12 @@ public class UserProfile extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference("Clients");
-
-        text_Name = (TextView) findViewById(R.id.text_Name);
-        text_Email = (TextView) findViewById(R.id.text_Email);
-        text_Phone_number = (TextView) findViewById(R.id.text_Phone_number);
+//        usersRef =  ref.child("Clients");
+        pSecond_name = (TextView) findViewById(R.id.pSecond_name);
+        pName = (TextView) findViewById(R.id.pName);
+        pPhone = (TextView) findViewById(R.id.pPhone);
+        pEmail = (TextView) findViewById(R.id.pEmail);
+        pSave = (Button) findViewById(R.id.pSave);
     }
 
     void info(){
@@ -45,12 +56,11 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DataSnapshot info_user = snapshot.child(user.getUid());
-                User client = info_user.getValue(User.class);
-
-                text_Name.setText(client.getName());
-                text_Email.setText(client.getEmail());
-                text_Phone_number.setText(client.getPhone());
-
+                client = info_user.getValue(User.class);
+                pSecond_name.setText(client.getSecond_name());
+                pName.setText(client.getFirst_name());
+                pEmail.setText(client.getEmail());
+                pPhone.setText(client.getPhone());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -58,6 +68,11 @@ public class UserProfile extends AppCompatActivity {
             }
         };
         mDatabase.addValueEventListener(postListener);
-
+    }
+    public void onClick_save(View view){
+        Map<String, Object> userNicknameUpdates = new HashMap<>();
+        userNicknameUpdates.put(client.getUid(), new User(pName.getText().toString(), pSecond_name.getText().toString(), client.getEmail(), pPhone.getText().toString(),client.getUid()));
+//        usersRef.updateChildren(userNicknameUpdates);
+        mDatabase.updateChildren(userNicknameUpdates);
     }
 }

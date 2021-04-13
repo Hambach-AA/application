@@ -1,27 +1,35 @@
 package com.example.myclient.Models;
 
 public class User {
-    private String name, email, phone;
+    private String first_name, second_name,email, phone, uid;
 
     public User() {
     }
 
-    public User(String name, String email, String phone) {
-        this.name = name;
+    public User(String first_name, String second_name, String email, String phone, String uid) {
+        this.first_name = first_name;
+        this.second_name = second_name;
         this.email = email;
         this.phone = phone;
+        this.uid = uid;
     }
 
-    public String getName() {
-        return name;
+    public String getFirst_name() {
+        return this.first_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirst_name(String name) {
+        this.first_name = name;
+    }
+
+    public String getSecond_name() { return this.second_name; }
+
+    public void setSecond_name(String second_name) {
+        this.second_name = second_name;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -29,12 +37,14 @@ public class User {
     }
 
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    public  String getUid() {return  this.uid; }
 
+    public  void  setUid(String uid) {this.uid = uid; }
 }

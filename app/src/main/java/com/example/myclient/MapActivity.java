@@ -25,6 +25,7 @@ public class MapActivity extends AppCompatActivity {
         btn_viewing_records = (Button) findViewById(R.id.btn_viewing_records);
         btn_settings = (Button) findViewById(R.id.btn_settings);
         btn_user_profile = (Button) findViewById(R.id.btn_user_profile);
+
     }
 
     public void onClick_user_profile(View view){

@@ -68,6 +68,23 @@
             />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/second_nameField"
+            text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Second name"
+            android:inputType="text"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="20sp"
+
+            app:met_baseColor="#0056d3"
+            app:met_errorColor="#ddaa00"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="#982360"
+            app:met_singleLineEllipsis="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/phoneField"

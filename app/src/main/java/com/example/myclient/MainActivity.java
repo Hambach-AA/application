@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         final MaterialEditText email = activity_reg.findViewById(R.id.emailField);
         final MaterialEditText pass = activity_reg.findViewById(R.id.passField);
         final MaterialEditText name = activity_reg.findViewById(R.id.nameField);
+        final MaterialEditText second_name = activity_reg.findViewById(R.id.second_nameField);
         final MaterialEditText phone = activity_reg.findViewById(R.id.phoneField);
 
         dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -160,8 +161,10 @@ public class MainActivity extends AppCompatActivity {
                             public void onSuccess(AuthResult authResult) {
                                 User user = new User();
                                 user.setEmail(email.getText().toString());
-                                user.setName(name.getText().toString());
+                                user.setFirst_name(name.getText().toString());
+                                user.setSecond_name(second_name.getText().toString());
                                 user.setPhone(phone.getText().toString());
+                                user.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
                                 //add in DataBase
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(user)
