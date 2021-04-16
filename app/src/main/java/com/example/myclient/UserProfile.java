@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myclient.Models.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,14 +25,11 @@ import java.util.Map;
 public class UserProfile extends AppCompatActivity {
 
     DatabaseReference mDatabase;
-//    DatabaseReference usersRef;
-//    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//    DatabaseReference ref = database.getReference("");
     FirebaseUser user;
 
     TextView pSecond_name, pName, pPhone, pEmail;
     Button pSave;
-    User client = new User();
+    User client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,36 +42,50 @@ public class UserProfile extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference("Clients");
-//        usersRef =  ref.child("Clients");
         pSecond_name = (TextView) findViewById(R.id.pSecond_name);
         pName = (TextView) findViewById(R.id.pName);
         pPhone = (TextView) findViewById(R.id.pPhone);
         pEmail = (TextView) findViewById(R.id.pEmail);
         pSave = (Button) findViewById(R.id.pSave);
     }
-
-    void info(){
-        ValueEventListener postListener = new ValueEventListener(){
+    private void info(){
+        mDatabase.child(user.getUid()).child("email").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DataSnapshot info_user = snapshot.child(user.getUid());
-                client = info_user.getValue(User.class);
-                pSecond_name.setText(client.getSecond_name());
-                pName.setText(client.getFirst_name());
-                pEmail.setText(client.getEmail());
-                pPhone.setText(client.getPhone());
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    pEmail.setText(task.getResult().getValue().toString());
+                }
             }
+            });
+        mDatabase.child(user.getUid()).child("first_name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    pName.setText(task.getResult().getValue().toString());
+                }
             }
-        };
-        mDatabase.addValueEventListener(postListener);
+        });
+        mDatabase.child(user.getUid()).child("phone").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    pPhone.setText(task.getResult().getValue().toString());
+                }
+            }
+        });
+        mDatabase.child(user.getUid()).child("second_name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    pSecond_name.setText(task.getResult().getValue().toString());
+                }
+            }
+        });
     }
-    public void onClick_save(View view){
-        Map<String, Object> userNicknameUpdates = new HashMap<>();
-        userNicknameUpdates.put(client.getUid(), new User(pName.getText().toString(), pSecond_name.getText().toString(), client.getEmail(), pPhone.getText().toString(),client.getUid()));
-//        usersRef.updateChildren(userNicknameUpdates);
-        mDatabase.updateChildren(userNicknameUpdates);
+
+    public void onClick_save_friends(View view){
+        mDatabase.child(user.getUid()).child("first_name").setValue(pName.getText().toString());
+        mDatabase.child(user.getUid()).child("phone").setValue(pPhone.getText().toString());
+        mDatabase.child(user.getUid()).child("second_name").setValue(pSecond_name.getText().toString());
     }
 }

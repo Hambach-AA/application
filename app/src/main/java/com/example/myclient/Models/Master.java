@@ -5,16 +5,26 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Master {
-    private String
-            first_name ="unknown",
-            second_name ="unknown",
-            email ="unknown",
-            phone ="unknown",
-            address ="unknown",
-            info ="unknown";
 
+
+    private String first_name ="";
+    private String second_name ="";
+    private String email ="";
+    private String phone ="";
+    private String address ="";
+    private String info ="";
+
+    ArrayList<String> friends = new ArrayList<>();
     ArrayList<String> List_services = new ArrayList<>();
     ArrayList<Schedule> schedule = new ArrayList<>();
+
+    public ArrayList<String> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(ArrayList<String> friends) {
+        this.friends = friends;
+    }
 
     public Master() {
     }
@@ -25,6 +35,16 @@ public class Master {
         this.phone = phone;
     }
 
+    private String
+            uid="";
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
     public String getAddress() {
         return address;
     }
@@ -100,12 +120,14 @@ public class Master {
                 Objects.equals(phone, master.phone) &&
                 Objects.equals(address, master.address) &&
                 Objects.equals(info, master.info) &&
+                Objects.equals(friends, master.friends) &&
                 Objects.equals(List_services, master.List_services) &&
-                Objects.equals(schedule, master.schedule);
+                Objects.equals(schedule, master.schedule) &&
+                Objects.equals(uid, master.uid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(first_name, second_name, email, phone, address, info, List_services, schedule);
+        return Objects.hash(first_name, second_name, email, phone, address, info, friends, List_services, schedule, uid);
     }
 }

@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <activity android:name=".SelectingWizard"></activity>
+        <activity android:name=".RecordingActivity"></activity>
+        <activity android:name=".MasterInfo" />
+        <activity android:name=".NewFriend" />
+        <activity android:name=".List_masters" />
         <activity android:name=".UserProfile" />
         <activity android:name=".MapActivity" />
         <activity android:name=".MainActivity">

@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase db;
@@ -165,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
                                 user.setSecond_name(second_name.getText().toString());
                                 user.setPhone(phone.getText().toString());
                                 user.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                user.setFriends(new ArrayList<>());
                                 //add in DataBase
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(user)

@@ -34,7 +34,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void onClick_selecting_wizard(View view){
-        Intent intent = new Intent(MapActivity.this,SelectingWizard.class);
+        Intent intent = new Intent(MapActivity.this,List_masters.class);
         startActivity(intent);
     }
 }

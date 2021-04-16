@@ -74,7 +74,7 @@
             android:id="@+id/pSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClick_save"
+            android:onClick="onClick_save_friends"
             android:text="Save" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
