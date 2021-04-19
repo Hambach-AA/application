@@ -1,14 +1,16 @@
 package com.example.myclient.Models;
 
 public class RecordingSession {
-    private String date, id_client, id_master, price, service;
+    private String date,day_week, start_service, end_service, id_client, id_master, price, service;
 
-    public RecordingSession(){
-
+    public RecordingSession() {
     }
 
-    public RecordingSession(String date, String id_client, String id_master, String price, String service) {
+    public RecordingSession(String date, String day_week, String start_service, String end_service, String id_client, String id_master, String price, String service) {
         this.date = date;
+        this.day_week = day_week;
+        this.start_service = start_service;
+        this.end_service = end_service;
         this.id_client = id_client;
         this.id_master = id_master;
         this.price = price;
@@ -21,6 +23,30 @@ public class RecordingSession {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getDay_week() {
+        return day_week;
+    }
+
+    public void setDay_week(String day_week) {
+        this.day_week = day_week;
+    }
+
+    public String getStart_service() {
+        return start_service;
+    }
+
+    public void setStart_service(String start_service) {
+        this.start_service = start_service;
+    }
+
+    public String getEnd_service() {
+        return end_service;
+    }
+
+    public void setEnd_service(String end_service) {
+        this.end_service = end_service;
     }
 
     public String getId_client() {
