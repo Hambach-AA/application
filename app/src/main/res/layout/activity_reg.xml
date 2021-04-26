@@ -14,66 +14,76 @@
         android:orientation="vertical">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/emailField"
-            android:hint="Email"
+            text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="E-mail"
             android:inputType="textEmailAddress"
-            text=""
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
             android:textSize="20sp"
 
-            app:met_floatingLabel="highlight"
             app:met_baseColor="#0056d3"
-            app:met_primaryColor="#982360"
             app:met_errorColor="#ddaa00"
-            app:met_singleLineEllipsis="true"
-            />
+            app:met_floatingLabel="highlight"
+            app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/passField"
-            android:hint="Password"
-            android:inputType="textPassword"
             text=""
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:textSize="20sp"
-
-            app:met_floatingLabel="highlight"
-            app:met_baseColor="#0056d3"
-            app:met_primaryColor="#982360"
-            app:met_errorColor="#ddaa00"
-            app:met_singleLineEllipsis="true"
-            />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nameField"
-            android:hint="Name"
-            android:inputType="text"
-            text=""
+            android:hint="Пароль"
+            android:inputType="textPassword"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
             android:textSize="20sp"
 
-            app:met_floatingLabel="highlight"
             app:met_baseColor="#0056d3"
-            app:met_primaryColor="#982360"
             app:met_errorColor="#ddaa00"
-            app:met_singleLineEllipsis="true"
-            />
+            app:met_floatingLabel="highlight"
+            app:met_singleLineEllipsis="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/nameField"
+            text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Имя"
+            android:inputType="text"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="20sp"
+
+            app:met_baseColor="#0056d3"
+            app:met_errorColor="#ddaa00"
+            app:met_floatingLabel="highlight"
+            app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/second_nameField"
             text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Second name"
+            android:hint="Фамилия"
             android:inputType="text"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textSize="20sp"
+
+            app:met_baseColor="#0056d3"
+            app:met_errorColor="#ddaa00"
+            app:met_floatingLabel="highlight"
+            app:met_singleLineEllipsis="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/phoneField"
+            text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Номер телефона"
+            android:inputType="phone"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
             android:textSize="20sp"
@@ -83,24 +93,6 @@
             app:met_floatingLabel="highlight"
             app:met_primaryColor="#982360"
             app:met_singleLineEllipsis="true" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/phoneField"
-            android:hint="Phone"
-            android:inputType="phone"
-            text=""
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:textSize="20sp"
-
-            app:met_floatingLabel="highlight"
-            app:met_baseColor="#0056d3"
-            app:met_primaryColor="#982360"
-            app:met_errorColor="#ddaa00"
-            app:met_singleLineEllipsis="true"
-            />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

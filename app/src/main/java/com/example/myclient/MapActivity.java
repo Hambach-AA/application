@@ -37,4 +37,8 @@ public class MapActivity extends AppCompatActivity {
         Intent intent = new Intent(MapActivity.this,List_masters.class);
         startActivity(intent);
     }
+    public void onClick_viewing_records(View view){
+        Intent intent = new Intent(MapActivity.this, ViewingRecords.class);
+        startActivity(intent);
+    }
 }

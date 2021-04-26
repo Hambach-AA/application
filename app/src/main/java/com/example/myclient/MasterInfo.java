@@ -127,7 +127,24 @@ public class MasterInfo extends AppCompatActivity {
         for (int i = 0; i < 7; i++) {
             final int finalI = i;
             final int time[] = new int[2];
+            final boolean[] flag = new boolean[1];
             String end = "";
+
+            mDatabase.child(Uid).child("schedule").child(String.valueOf(finalI)).child("enable").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if ("true".equals(snapshot.getValue().toString())){
+                        flag[0] = true;
+                    }
+                    else{
+                        flag[0]=false;
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
             mDatabase.child(Uid).child("schedule").child(String.valueOf(finalI)).child("time_start").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -144,7 +161,12 @@ public class MasterInfo extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     time[1] = Integer.parseInt(snapshot.getValue().toString());
-                    textViews.get(finalI).setText(timeUnParse(time[0])+" - "+timeUnParse(time[1]));
+                    if(flag[0]) {
+                        textViews.get(finalI).setText(timeUnParse(time[0]) + " - " + timeUnParse(time[1]));
+                    }
+                    else{
+                        textViews.get(finalI).setText("Выходной");
+                    }
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {

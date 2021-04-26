@@ -6,16 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myclient.List_masters;
 import com.example.myclient.MasterInfo;
 import com.example.myclient.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StateAdapter extends RecyclerView.Adapter<StateAdapter.NumberViewHolder>{
@@ -52,15 +49,16 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.NumberViewHo
 
     class NumberViewHolder extends RecyclerView.ViewHolder {
 
-        TextView first_name;
-        TextView second_name;
+        TextView name;
+        TextView info_master;
         String Uid="";
 
         public NumberViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            first_name = itemView.findViewById(R.id.first_name_master);
-            second_name = itemView.findViewById(R.id.second_name_master);
+            name = itemView.findViewById(R.id.first_name_master);
+
+            info_master = itemView.findViewById(R.id.info_master);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,8 +70,8 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.NumberViewHo
         }
 
         void bind (Master master){
-            first_name.setText(master.getFirst_name());
-            second_name.setText(master.getSecond_name());
+            name.setText(master.getFirst_name() + " " + master.getSecond_name());
+            info_master.setText(master.getInfo());
             Uid = master.getUid();
         }
 

@@ -10,7 +10,9 @@
         android:id="@+id/rec_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,18 +21,22 @@
         android:id="@+id/rec_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Дата"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rec_spinner"
-        android:hint="Дата"/>
+        app:layout_constraintTop_toBottomOf="@+id/rec_spinner" />
 
     <TextView
         android:id="@+id/rec_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="10dp"
         android:hint="Время"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,24 +44,66 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec_list"
-        android:layout_width="410dp"
-        android:layout_height="147dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/rec_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rec_time" />
+        app:layout_constraintTop_toBottomOf="@+id/rec_time"
+        app:layout_constraintVertical_bias="0.496" />
 
     <Button
         android:id="@+id/rec_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="Записаться"
         android:textColor="@android:color/white"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="10dp"
+        android:text="Дата записи:"
+        app:layout_constraintEnd_toStartOf="@+id/rec_date"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rec_spinner" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
+        android:text="Время записи:"
+        app:layout_constraintEnd_toStartOf="@+id/rec_time"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/weekend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rec_list" />
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/rec_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

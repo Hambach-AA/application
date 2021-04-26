@@ -114,6 +114,16 @@ public class List_masters extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     master.setUid(snapshot.getValue().toString());
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            mDatabase.child(friends.get(i)).child("info").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    master.setInfo(snapshot.getValue().toString());
                     masters.add(master);
                     adapter.notifyDataSetChanged();
                 }

@@ -17,7 +17,7 @@
             text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Second name"
+            android:hint="Фамилия"
             android:inputType="text"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
@@ -34,7 +34,7 @@
             text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="Имя"
             android:inputType="text"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
@@ -47,22 +47,21 @@
             app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/pPhone"
+            text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pPhone"
-            android:hint="Phone"
+            android:hint="Номер телефона"
             android:inputType="number"
-            text=""
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
             android:textSize="20sp"
 
-            app:met_floatingLabel="highlight"
             app:met_baseColor="#0056d3"
-            app:met_primaryColor="#982360"
             app:met_errorColor="#ddaa00"
-            app:met_singleLineEllipsis="true"
-            />
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="#982360"
+            app:met_singleLineEllipsis="true" />
 
         <TextView
             android:id="@+id/pEmail"
@@ -75,6 +74,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClick_save_friends"
-            android:text="Save" />
+            android:text="Сохранить данные" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

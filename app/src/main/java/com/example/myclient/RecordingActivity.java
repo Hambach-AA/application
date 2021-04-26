@@ -2,6 +2,7 @@ package com.example.myclient;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,7 @@ public class RecordingActivity extends AppCompatActivity {
     Spinner spinner;
     TextView date;
     TextView time;
+    TextView weekend;
     Button btn;
     String Master_Uid;
     ArrayList<Services> service = new ArrayList<>();
@@ -75,6 +77,7 @@ public class RecordingActivity extends AppCompatActivity {
 
     String service_name, price, service_time, day_week;
 
+    boolean confirmation;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -86,6 +89,7 @@ public class RecordingActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter_free_time);
 
+        weekend = (TextView) findViewById(R.id.weekend);
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, services);
 
@@ -120,22 +124,32 @@ public class RecordingActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(сhecking_time(timeParse(time.getText().toString()))) {
-                    RecordingSession rs = new RecordingSession();
-                    rs.setId_master(Master_Uid);
-                    rs.setId_client(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    rs.setDate(date.getText().toString());
-                    rs.setDay_week(day_week);
+                if(confirmation){
+                    if(сhecking_time(timeParse(time.getText().toString()))) {
+                        RecordingSession rs = new RecordingSession();
+                        rs.setId_master(Master_Uid);
+                        rs.setId_client(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        rs.setDate(date.getText().toString());
+                        rs.setDay_week(day_week);
 
-                    //TODO получение выбраного в спинере значения
-                    rs.setService(service_name);
-                    rs.setPrice(price);
-                    rs.setStart_service(String.valueOf(timeParse(time.getText().toString())));
-                    rs.setEnd_service(String.valueOf(timeParse(time.getText().toString()) + Integer.valueOf(service_time))); //+++++++++++++++++++++++++++++++++++
-                    rsDatabase.push().setValue(rs);
+                        //TODO получение выбраного в спинере значения
+                        rs.setService(service_name);
+                        rs.setPrice(price);
+                        rs.setStart_service(String.valueOf(timeParse(time.getText().toString())));
+                        rs.setEnd_service(String.valueOf(timeParse(time.getText().toString()) + Integer.valueOf(service_time))); //+++++++++++++++++++++++++++++++++++
+                        rsDatabase.push().setValue(rs);
+
+                        Intent intent= new Intent(RecordingActivity.this, MapActivity.class);
+                        startActivity(intent);
+
+                    }
+                    else {
+                        Toast toast= Toast.makeText(RecordingActivity.this,"Выберите другой день или время",Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
                 else {
-                    Toast toast= Toast.makeText(RecordingActivity.this,"Выберите другой день или время",Toast.LENGTH_SHORT);
+                    Toast toast= Toast.makeText(RecordingActivity.this,"Выберите другой день",Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -198,6 +212,8 @@ public class RecordingActivity extends AppCompatActivity {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
+                weekend.setText("");
+                confirmation = true;
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(RecordingActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
@@ -210,8 +226,31 @@ public class RecordingActivity extends AppCompatActivity {
 
                                 v.setText(editTextDateParam);
 
-                                working_hours_master();
-                                master_records();
+                                mDatabase.child("schedule").child(String.valueOf(day_week)).child("enable").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if ("true".equals(snapshot.getValue().toString())){
+
+                                            adapter_free_time.notifyDataSetChanged();
+                                            free_times.clear();
+
+                                            working_hours_master();
+                                            master_records();
+                                        }
+                                        else{
+                                            weekend.setText("Выходной день");
+                                            confirmation = false;
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+
+//                                working_hours_master();
+//                                master_records();
                             }
                         }, year, month, day);
                 datePickerDialog.show();
