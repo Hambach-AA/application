@@ -226,19 +226,21 @@ public class RecordingActivity extends AppCompatActivity {
 
                                 v.setText(editTextDateParam);
 
-                                mDatabase.child("schedule").child(String.valueOf(day_week)).child("enable").addListenerForSingleValueEvent(new ValueEventListener() {
+                                mDatabase.child("schedule").child(day_week).child("enable").addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if ("true".equals(snapshot.getValue().toString())){
 
                                             adapter_free_time.notifyDataSetChanged();
                                             free_times.clear();
-
+                                            recordingSessions = new ArrayList<>();
                                             working_hours_master();
                                             master_records();
                                         }
                                         else{
                                             weekend.setText("Выходной день");
+                                            free_times.clear();
+                                            adapter_free_time.notifyDataSetChanged();
                                             confirmation = false;
                                         }
                                     }
@@ -253,21 +255,31 @@ public class RecordingActivity extends AppCompatActivity {
 //                                master_records();
                             }
                         }, year, month, day);
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
                 datePickerDialog.show();
             }
         });
     }
 
     private  String day_week_converter(int day) {
+
         String week_normal;
-        System.out.println(day);
-        if (day == 1){ week_normal = "3"; }
-        else if (day == 2) {week_normal = "4";}
-        else if (day == 3) {week_normal = "5";}
-        else if (day == 4) {week_normal = "6";}
-        else if (day == 5) {week_normal = "0";}
-        else if (day == 6) {week_normal = "1";}
-        else {week_normal = "2";}
+
+//        System.out.println("________________________________________");
+//        System.out.println("________________________________________");
+//        System.out.println("________________________________________");
+//        System.out.println(day);
+//        System.out.println("________________________________________");
+//        System.out.println("________________________________________");
+//        System.out.println("________________________________________");
+
+        if (day == 1){ week_normal = "2"; }
+        else if (day == 2) {week_normal = "3";}
+        else if (day == 3) {week_normal = "4";}
+        else if (day == 4) {week_normal = "5";}
+        else if (day == 5) {week_normal = "6";}
+        else if (day == 6) {week_normal = "0";}
+        else {week_normal = "1";}
         return week_normal;
     }
 
@@ -341,7 +353,7 @@ public class RecordingActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot rsm : snapshot.getChildren()){
                     RecordingSession recordingSession = rsm.getValue(RecordingSession.class);
-                    if (recordingSession.getId_master().equals(Master_Uid) && recordingSession.getDay_week().equals(day_week)){
+                    if (recordingSession.getId_master().equals(Master_Uid) && recordingSession.getDate().equals(date.getText().toString())){
                         recordingSessions.add(Integer.valueOf(recordingSession.getStart_service()));
                         recordingSessions.add(Integer.valueOf(recordingSession.getEnd_service()));
                     }
@@ -360,7 +372,7 @@ public class RecordingActivity extends AppCompatActivity {
     private void time_intervals(){
 
         Collections.sort(recordingSessions);
-        for( int i =0; i<recordingSessions.size(); i+=2){
+        for( int i = 0; i<recordingSessions.size(); i+=2){
             if(!recordingSessions.get(i).equals(recordingSessions.get(i + 1))){
 
                 free_times.add(new Free_time(timeUnParse(recordingSessions.get(i)),timeUnParse(recordingSessions.get(i+1))));

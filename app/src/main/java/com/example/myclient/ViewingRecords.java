@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,13 +52,14 @@ public class ViewingRecords extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("Recording_Session"); //????????????????
         user = FirebaseAuth.getInstance().getCurrentUser();
     }
+
     private void  user_records(){
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot rsm : snapshot.getChildren()){
                     RecordingSession recordingSession = rsm.getValue(RecordingSession.class);
-                    if (recordingSession.getId_client().equals(user.getUid())){
+                    if (recordingSession.getId_client().equals(user.getUid()) && Compare_dates(recordingSession.getDate())){
                         recordingSessions.add(recordingSession);
                     }
                 }
@@ -68,6 +70,7 @@ public class ViewingRecords extends AppCompatActivity {
             }
         });
     }
+
     private String timeUnParse(int temp) {
         int minute = 0;
         int hours = 0;
@@ -131,5 +134,27 @@ public class ViewingRecords extends AppCompatActivity {
         }
         recordAdapter.notifyDataSetChanged();
 
+    }
+
+    private boolean Compare_dates(String date){ // Сравнивает дату с текущим днем, > или = true иначе false
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH)+1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        int day_01 = Integer.parseInt(date.substring(0,date.indexOf(".")));
+        int month_01 = Integer.parseInt(date.substring(date.indexOf(".")+1,date.indexOf(".",3)));
+        int year_01 = Integer.parseInt(date.substring(date.indexOf(".",3)+1,date.indexOf(".",3)+5));
+
+        if (year<=year_01){
+            if(month<=month_01){
+                if(day<=day_01){
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
