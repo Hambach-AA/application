@@ -11,7 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myclient.Models.Master;
+import com.example.myclient.Models.Master_new;
 import com.example.myclient.Models.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +34,7 @@ public class NewFriend extends AppCompatActivity {
     TextView UidField;
     User client = new User();
     DatabaseReference mDb;
-
+    DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +44,7 @@ public class NewFriend extends AppCompatActivity {
     }
 
     void init() {
-
+        mDatabase = FirebaseDatabase.getInstance().getReference("Masters");
         mDb = FirebaseDatabase.getInstance().getReference("Clients").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("friends");
         UidField = findViewById(R.id.UidField);
         add_new_friend = (Button) findViewById(R.id.add_new_friend);
@@ -49,22 +52,25 @@ public class NewFriend extends AppCompatActivity {
     }
 
     public void loadData(View view) {
-
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Masters");
-        Query dataQuery = dbRef.orderByChild("uid").equalTo(UidField.getText().toString());
-
-        dataQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    mDb.push().setValue(UidField.getText().toString());
-                } else {
-                    Toast.makeText(NewFriend.this, "Пользователь не найден", Toast.LENGTH_LONG).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot rsm : snapshot.getChildren()) {
+
+                    String email = rsm.child("email").getValue(String.class);
+                    String uid_m = rsm.child("uid").getValue(String.class);
+                    if (email.equals(UidField.getText().toString())){
+                        mDb.push().setValue(uid_m);
+                        Intent intent = new Intent(NewFriend.this, List_masters.class);
+                        startActivity(intent);
+                    }
+
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.myclient.Models;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myclient.MasterInfo;
 import com.example.myclient.R;
+import com.example.myclient.ViewingRecords;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,9 +24,10 @@ import java.util.List;
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder>{
 
     private final List<RecordingSession> recordingSessions;
-
-    public RecordAdapter(List<RecordingSession> recordingSessions) {
+    private Context parent;
+    public RecordAdapter(List<RecordingSession> recordingSessions, Context parent) {
         this.recordingSessions = recordingSessions;
+        this.parent = parent;
     }
 
     @NonNull
@@ -51,6 +55,10 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
 
         TextView service_rec, date_rec, time_rec, price_rec, address_rec;
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Masters");
+        DatabaseReference mRec = FirebaseDatabase.getInstance().getReference("Recording_Session");
+        String client_UID;
+
+
 
         public RecordViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +68,36 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
             time_rec = itemView.findViewById(R.id.time_rec);
             price_rec = itemView.findViewById(R.id.price_rec);
             address_rec = itemView.findViewById(R.id.address_rec);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mRec.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot rsm : snapshot.getChildren()) {
+                                String date_rec_ = rsm.child("date").getValue(String.class);
+                                String id = rsm.child("id_client").getValue(String.class);
+                                String service_ = rsm.child("service").getValue(String.class);
+
+                                if (date_rec_.equals(date_rec.getText().toString()) && id.equals(client_UID) && service_.equals(service_rec.getText().toString())){
+
+                                    rsm.getRef().removeValue();
+                                    Intent intent = new Intent(parent, ViewingRecords.class);
+                                    parent.startActivity(intent);
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    return true;
+                }
+            });
 
         }
         void bind (RecordingSession recordingSession){
@@ -71,6 +109,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
                     time_rec.setText(recordingSession.getStart_service()+" - "+recordingSession.getEnd_service());
                     price_rec.setText(recordingSession.getPrice());
                     address_rec.setText(snapshot.getValue().toString());
+                    client_UID = recordingSession.getId_client();
+
+
                 }
 
                 @Override

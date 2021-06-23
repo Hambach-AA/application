@@ -45,7 +45,7 @@ public class ViewingRecords extends AppCompatActivity {
     void init(){
 
         recyclerview_reg = (RecyclerView) findViewById(R.id.recyclerview_reg);
-        recordAdapter = new RecordAdapter(recordingSessions);
+        recordAdapter = new RecordAdapter(recordingSessions, this);
         recyclerview_reg.setLayoutManager(new LinearLayoutManager(this));
         recyclerview_reg.setAdapter(recordAdapter);
 

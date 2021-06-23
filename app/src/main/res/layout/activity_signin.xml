@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:hint="E-mail"
             android:inputType="textEmailAddress"
-            android:text="qwertyuiop@qaz.ru"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
 
@@ -37,7 +36,6 @@
             android:layout_height="wrap_content"
             android:hint="Пароль"
             android:inputType="textPassword"
-            android:text="qwertyuiop"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimaryDark"
 
