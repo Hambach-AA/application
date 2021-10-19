@@ -26,7 +26,7 @@
             app:met_baseColor="#0056d3"
             app:met_errorColor="#ddaa00"
             app:met_floatingLabel="highlight"
-            app:met_primaryColor="#982360"
+            app:met_primaryColor="@color/colorPrimary"
             app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -73,7 +73,10 @@
             android:id="@+id/pSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:onClick="onClick_save_friends"
-            android:text="Сохранить данные" />
+            android:text="Сохранить данные"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

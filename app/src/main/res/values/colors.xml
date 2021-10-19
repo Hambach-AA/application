@@ -6,4 +6,6 @@
     <color name="textBottom">#0090FF</color>
     <color name="ripple_effect">#673AB7</color>
     <color name="btn_sign_in">#E91E63</color>
+    <color name="Blue">#0090FF</color>
+    <color name="White">#FFFFFF</color>
 </resources>

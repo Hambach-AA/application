@@ -95,4 +95,5 @@
             app:met_singleLineEllipsis="true" />
 
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

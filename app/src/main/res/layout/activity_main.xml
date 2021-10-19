@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/root_element"
     tools:context=".MainActivity">
+    and
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -61,10 +62,12 @@
             android:layout_marginRight="6dp"
             android:layout_weight="1"
             android:text="Вход"
+            android:background="@color/colorPrimary"
             android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnRegister"
+            android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"

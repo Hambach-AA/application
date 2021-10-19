@@ -337,7 +337,7 @@ public class RecordingActivity extends AppCompatActivity {
         mDatabase.child("schedule").child(day_week).child("time_finish").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                recordingSessions.add((Integer.valueOf(snapshot.getValue().toString())-Integer.valueOf(service_time)));
+                recordingSessions.add((Integer.valueOf(snapshot.getValue().toString())));
             }
 
             @Override
