@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,8 @@ public class RecordingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording);
 
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Запись на приём</font>"));
+
         recyclerView = (RecyclerView) findViewById(R.id.rec_list);
         adapter_free_time = new FreeTimeAdapter(free_times);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -124,6 +127,7 @@ public class RecordingActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(confirmation){
                     if(сhecking_time(timeParse(time.getText().toString()))) {
                         RecordingSession rs = new RecordingSession();
@@ -374,8 +378,9 @@ public class RecordingActivity extends AppCompatActivity {
         Collections.sort(recordingSessions);
         for( int i = 0; i<recordingSessions.size(); i+=2){
             if(!recordingSessions.get(i).equals(recordingSessions.get(i + 1))){
-
-                free_times.add(new Free_time(timeUnParse(recordingSessions.get(i)),timeUnParse(recordingSessions.get(i+1))));
+                if(recordingSessions.get(i+1) - recordingSessions.get(i) >= Integer.valueOf(service_time)) {
+                    free_times.add(new Free_time(timeUnParse(recordingSessions.get(i)), timeUnParse(recordingSessions.get(i + 1)-Integer.valueOf(service_time))));
+                }
             }
         }
         adapter_free_time.notifyDataSetChanged();
@@ -413,7 +418,7 @@ public class RecordingActivity extends AppCompatActivity {
     private boolean сhecking_time(int time){
         boolean flag = false;
         for(int i = 0; i<recordingSessions.size(); i+=2){
-            if(recordingSessions.get(i) <= time && recordingSessions.get(i+1) > time){
+            if(recordingSessions.get(i) <= time && recordingSessions.get(i+1) >= time){
                 flag = true;
                 break;
             }

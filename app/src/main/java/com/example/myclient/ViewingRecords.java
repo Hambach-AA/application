@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Html;
 
 import com.example.myclient.Models.RecordAdapter;
 import com.example.myclient.Models.RecordingSession;
@@ -36,7 +37,7 @@ public class ViewingRecords extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewing_records);
-
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Активные записи</font>"));
 
         init();
         user_records();

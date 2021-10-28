@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 
@@ -47,6 +48,7 @@ public class List_masters extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_masters);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Список мастеров</font>"));
         init();
         info_friends();
     }

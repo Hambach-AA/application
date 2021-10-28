@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void showSignInWindow() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-//        dialog.setTitle("Войти в систему");
-//        dialog.setMessage("Введите данные для авторизации");
+        dialog.setTitle("Войти в систему");
+        dialog.setMessage("Введите данные для авторизации");
 
         LayoutInflater inflater = LayoutInflater.from(this);
         View activity_signin = inflater.inflate(R.layout.activity_signin, null);
@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void showRegisterWindow() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-//        dialog.setTitle("Регистрация");
-//        dialog.setMessage("Введите данные для регистрации");
+        dialog.setTitle("Регистрация");
+        dialog.setMessage("Введите данные для регистрации");
 
         LayoutInflater inflater = LayoutInflater.from(this);
         View activity_reg = inflater.inflate(R.layout.activity_reg, null);

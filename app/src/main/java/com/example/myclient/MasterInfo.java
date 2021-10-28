@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class MasterInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master_info);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Информация о мастере</font>"));
 
         Uid = getIntent().getStringExtra("Uid");
 
